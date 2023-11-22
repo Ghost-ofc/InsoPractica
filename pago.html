@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Pago</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        section {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .bank-logo {
+            width: 100px; /* Tamaño fijo para todas las imágenes */
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .bank-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .bank-item {
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        .dni-input,
+        .boucher-input {
+            width: calc(100% - 20px); /* Resta el padding para que encaje con el diseño */
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: -8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #6c0e10;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover {
+            background-color: #460900;
+
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <section>
+        <h2>REGISTRAR PAGO</h2>
+        <p>Puede realizar el pago en los siguientes bancos y adjuntar su comprobante para registrar el pago correctamente.</p>
+
+        <div class="bank-container">
+            <div class="bank-item">
+                <img src="BBVA.jpg" alt="BBVA Logo" class="bank-logo">
+                <p>Número de cuenta: 7534-2064-4521</p>
+            </div>
+
+            <div class="bank-item">
+                <img src="BCP.png" alt="BCP Logo" class="bank-logo">
+                <p>Número de cuenta: 4596-5156-2187</p>
+            </div>
+
+            <div class="bank-item">
+                <img src="Interbank.png" alt="Interbank Logo" class="bank-logo">
+                <p>Número de cuenta: 5446-5776-8456</p>
+            </div>
+
+            <div class="bank-item">
+                <img src="Scotiabank.jpg" alt="Scotiabank Logo" class="bank-logo">
+                <p>Número de cuenta: 7049-4805-6878</p>
+            </div>
+        </div>
+
+        <label for="monto">Monto a pagar:</label>
+        <input type="text" id="monto" name="monto" value="S/1000" readonly> 
+        
+        <label for="dni">Número de DNI:</label>
+        <input type="number" id="dni" name="dni" class="dni-input" pattern="[0-9]{8}" maxlength="8" required placeholder="Ingrese su DNI">
+        <div class="error-message" id="dni-error"></div>
+
+        <label for="boucher">Adjuntar Boucher:</label>
+        <input type="file" id="boucher" name="boucher" accept=".jpg, .jpeg, .png" required>
+        <div class="error-message" id="boucher-error"></div>
+
+        <button type="button" onclick="registrarPago()">Registrar Pago</button>
+    </section>
+
+    <script>
+        function registrarPago() {
+            // Validar la longitud del DNI
+            var dniInput = document.getElementById('dni');
+            var dniError = document.getElementById('dni-error');
+
+            if (dniInput.value.length !== 8) {
+                dniError.textContent = 'El DNI debe tener 8 dígitos.';
+                return;
+            } else {
+                dniError.textContent = '';
+            }
+
+            // Validar si se ha adjuntado el voucher
+            var boucherInput = document.getElementById('boucher');
+            var boucherError = document.getElementById('boucher-error');
+
+            if (boucherInput.files.length === 0) {
+                boucherError.textContent = 'Debe adjuntar un voucher.';
+                return;
+            } else {
+                boucherError.textContent = '';
+            }
+
+            // Lógica para registrar el pago, puedes agregarla aquí.
+            alert("¡Pago registrado con éxito!");
+        }
+    </script>
+
+</body>
+</html>
